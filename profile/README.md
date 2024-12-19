@@ -15,7 +15,7 @@
 5. [Tokenomics](#tokenomics)
    5.1. [Initial Parameters](#initial-parameters)  
    5.2. [Distribution (Owner Allocation & ICO)](#distribution-owner-allocation--ico)  
-   5.3. [Rebase Formula ("Genius" Formula)](#rebase-formula-genius-formula)  
+   5.3. [Rebase Formula](#rebase-formula-formula)  
    5.4. [Market Dynamics and Price Stability](#market-dynamics-and-price-stability)
    5.5. [Liquidity Provider Rewards](#liquidity-provider-rewards)
    5.6. [Fee-Based Treasury](#fee-based-treasury)
@@ -50,8 +50,6 @@
 
 ## Introduction
 COIN100 (C100) is a decentralized cryptocurrency index fund built on the Polygon network. It represents the top 100 cryptocurrencies by market capitalization, mirroring the performance of the overall crypto market. Inspired by traditional index funds like the S&P 500, C100 provides a diversified, market-wide exposure to the crypto industry without requiring active portfolio management from investors.
-
-COIN100 (C100) provides a seamless, fair, and transparent way to invest in the top 100 cryptocurrencies. Through a global rebase mechanism, dynamic pricing adjustments, fee-based treasury growth, configurable liquidity provider incentives, and robust security, it aims to become a trusted and stable representation of the crypto market’s collective growth. With a clear path towards decentralized governance and community-driven evolution, C100 empowers investors to participate in a diversified crypto index without the complexities of active portfolio management. Join the community, contribute to liquidity provisioning, and help shape the future of decentralized index investing.
 
 ## Problem Statement
 The crypto market can be volatile and fragmented. Investors seeking broad exposure face challenges in selecting and maintaining a balanced portfolio of top assets. Without a simple mechanism to track the aggregate performance of the top 100 cryptocurrencies, investors may either miss growth opportunities or take on unnecessary risk.
@@ -97,7 +95,7 @@ C100 emphasizes simplicity in its public sale to ensure broad accessibility and 
 - **Owner Allocation:** 3% of total supply is retained by the owner for development, liquidity provision, and other strategic purposes.
 - **ICO Allocation:** 90% of total supply is allocated for the Initial Coin Offering (ICO), enabling widespread distribution and community participation.
 
-### Rebase Formula ("Genius" Formula)
+### Rebase Formula
 **ratio = M_new / M_old**  
 - **New Supply = Old Supply * ratio**  
 - Every holder’s balance is multiplied by the same ratio.
@@ -620,3 +618,14 @@ For further inquiries, support, or to engage with the COIN100 team, please reach
 - **coin100:** `0x1459884924e7e973d1579ee4ebcaa4ef0b1c8f21`
 - **publicSale:** `0x2cdac1848b1c14d36e173e10315da97bb17b5489`
 
+https://discord.com/channels/1318664310490398770/1318664310490398773
+https://www.reddit.com/r/Coin100
+https://x.com/Coin100token
+https://t.me/coin100token
+
+---
+
+## Conclusion
+COIN100 (C100) is a decentralized cryptocurrency index fund built on the Polygon network. It represents the top 100 cryptocurrencies by market capitalization, mirroring the performance of the overall crypto market. Inspired by traditional index funds like the S&P 500, C100 provides a diversified, market-wide exposure to the crypto industry without requiring active portfolio management from investors.
+
+COIN100 (C100) provides a seamless, fair, and transparent way to invest in the top 100 cryptocurrencies. Through a global rebase mechanism, dynamic pricing adjustments, fee-based treasury growth, configurable liquidity provider incentives, and robust security, it aims to become a trusted and stable representation of the crypto market’s collective growth. With a clear path towards decentralized governance and community-driven evolution, C100 empowers investors to participate in a diversified crypto index without the complexities of active portfolio management. Join the community, contribute to liquidity provisioning, and help shape the future of decentralized index investing.
