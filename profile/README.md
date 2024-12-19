@@ -613,6 +613,7 @@ For further inquiries, support, or to engage with the COIN100 team, please reach
 
 - **Website:** [https://coin100.link](https://coin100.link)
 - **Email:** [mayor@coin100.link](mailto:mayor@coin100.link)
+- **Github:** [coin100-dao](https://github.com/coin100-dao)
 - **Discord:** [Join Our Discord](https://discord.com/channels/1318664310490398770/1318664310490398773)
 - **Reddit:** [r/Coin100](https://www.reddit.com/r/Coin100)
 - **X:** [@Coin100token](https://x.com/Coin100token)
