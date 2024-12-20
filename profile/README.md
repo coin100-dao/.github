@@ -9,7 +9,7 @@
    - 4.2. [Global Rebase Mechanism](#global-rebase-mechanism)
    - 4.3. [Fixed Pricing During Presale](#fixed-pricing-during-presale)
    - 4.4. [Fee-Based Treasury and Liquidity Growth](#fee-based-treasury-and-liquidity-growth)
-   - 4.5. [Single Liquidity Pool Support](#single-liquidity-pool-support)
+   - 4.5. [Multiple Liquidity Pool Support](#multiple-liquidity-pool-support)
    - 4.6. [Simplified Public Sale Mechanics](#simplified-public-sale-mechanics)
 5. [Tokenomics](#tokenomics)
    - 5.1. [Initial Parameters](#initial-parameters)
@@ -50,7 +50,7 @@
 ## Introduction
 COIN100 (C100) is a decentralized cryptocurrency index fund built on the Polygon network. It represents the top 100 cryptocurrencies by market capitalization, mirroring the performance of the overall crypto market. Inspired by traditional index funds like the S&P 500, C100 provides diversified, market-wide exposure to the crypto industry without requiring active portfolio management from investors.
 
-COIN100 (C100) offers a seamless, fair, and transparent way to invest in the top 100 cryptocurrencies. Through a robust rebasing mechanism aligned with market capitalization, fee-based treasury and liquidity growth, single liquidity pool support, and secure access controls, it aims to become a trusted and stable representation of the crypto market’s collective growth. With a clear path towards decentralized governance and community-driven evolution, C100 empowers investors to participate in a diversified crypto index without the complexities of active portfolio management. Join the community, contribute to liquidity provisioning, and help shape the future of decentralized index investing.
+COIN100 (C100) offers a seamless, fair, and transparent way to invest in the top 100 cryptocurrencies. Through a robust rebasing mechanism aligned with market capitalization, fee-based treasury and liquidity growth, multiple liquidity pool support, and secure access controls, it aims to become a trusted and stable representation of the crypto market’s collective growth. With a clear path towards decentralized governance and community-driven evolution, C100 empowers investors to participate in a diversified crypto index without the complexities of active portfolio management. Join the community, contribute to liquidity provisioning, and help shape the future of decentralized index investing.
 
 ## Problem Statement
 The crypto market can be volatile and fragmented. Investors seeking broad exposure face challenges in selecting and maintaining a balanced portfolio of top assets. Without a simple mechanism to track the aggregate performance of the top 100 cryptocurrencies, investors may either miss growth opportunities or take on unnecessary risk.
@@ -61,6 +61,7 @@ C100 addresses these challenges by:
 - Automatically adjusting each holder’s balance through global rebases as the top 100 market cap changes.
 - Implementing a fixed pricing mechanism during presale and liquidity pool-based pricing post-presale.
 - Introducing fee-based treasury and liquidity growth mechanisms.
+- Supporting multiple liquidity pools to maximize liquidity and decentralization.
 - Simplifying public sale mechanics to ensure broad accessibility and ease of participation for all investors.
 
 ## Key Principles and Features
@@ -75,10 +76,10 @@ On each rebase call, the total supply adjusts to reflect the updated top 100 cry
 During the presale period, C100 tokens are sold at a fixed rate of 1 C100 = 0.001 USDC. This ensures price stability and predictability for early investors.
 
 ### Fee-Based Treasury and Liquidity Growth
-C100 introduces a 2% transaction fee, split equally between the treasury (1%) and the liquidity pool (1%). This mechanism supports continuous growth and funding for development, marketing, and liquidity provisioning.
+C100 introduces a 2% transaction fee, split equally between the treasury (1%) and the approved liquidity pools (1%). This mechanism supports continuous growth and funding for development, marketing, and liquidity provisioning.
 
-### Single Liquidity Pool Support
-C100 supports a single liquidity pool (C100/USDC) to streamline liquidity management and price determination post-presale. This simplifies interactions for liquidity providers and enhances price stability.
+### Multiple Liquidity Pool Support
+C100 supports multiple liquidity pools (C100/USDC) managed by the admin to maximize liquidity, enhance decentralization, and ensure resilience. This allows liquidity to be distributed across various DEXs, providing flexibility for liquidity providers and improving price stability.
 
 ### Simplified Public Sale Mechanics
 The public sale is streamlined to accept only USDC at a fixed rate, reducing complexity and enhancing user experience. This ensures broad accessibility and ease of participation for all investors.
@@ -104,7 +105,7 @@ This ensures fair and transparent tracking of the market cap changes.
 If the market cap doubles, all balances double, maintaining the same fractional ownership. As the community matures and markets become more efficient, the token price should remain stable around its baseline in response to these proportional adjustments.
 
 ### Liquidity Provider Rewards
-Liquidity providers are incentivized through a fixed reward system. A dedicated 1% fee from each transaction is allocated to the liquidity pool, ensuring deep liquidity pools, reducing slippage, and fostering a robust trading environment.
+Liquidity providers are incentivized through a fixed reward system. A dedicated 1% fee from each transaction is allocated to all approved liquidity pools, ensuring deep liquidity pools, reducing slippage, and fostering a robust trading environment.
 
 ### Fee-Based Treasury
 A 1% transaction fee is collected and sent to the treasury address. This mechanism supports the growth and sustainability of the project by funding development, marketing, audits, and other strategic initiatives.
@@ -115,7 +116,7 @@ A 1% transaction fee is collected and sent to the treasury address. This mechani
 Deployed on Polygon for low gas fees and high throughput, ensuring efficient and cost-effective transactions for users.
 
 ### C100 Token Contract
-Implements ERC20 standards with a rebasing mechanism, ownership control, pause/unpause functionalities, fee splitting between treasury and liquidity pool, and integration points for future governance.
+Implements ERC20 standards with a rebasing mechanism, ownership control, pause/unpause functionalities, fee splitting between treasury and multiple liquidity pools, and integration points for future governance.
 
 ### Public Sale Contract
 Handles the initial distribution of C100 tokens. Investors purchase C100 with USDC at a fixed rate during the ICO period. Unsold tokens are burned at the end, ensuring only the circulating supply reflects real participants.
@@ -124,7 +125,7 @@ Handles the initial distribution of C100 tokens. Investors purchase C100 with US
 Balances are tracked in a large integer unit called “gons.” The global `gonsPerFragment` variable determines how these translate into user balances. On rebase, adjusting `gonsPerFragment` updates everyone’s balance proportionally in O(1) complexity.
 
 ### Rebase Mechanism
-The rebase mechanism adjusts the total supply based on the new market capitalization and current price. During presale, a fixed price is used, and post-presale, the price is determined by the single liquidity pool (C100/USDC). This ensures accurate and real-time supply adjustments aligned with market conditions.
+The rebase mechanism adjusts the total supply based on the new market capitalization and current price. During presale, a fixed price is used, and post-presale, the price is determined by averaging prices from multiple approved liquidity pools (C100/USDC). This ensures accurate and real-time supply adjustments aligned with market conditions.
 
 ## Governance
 
@@ -156,7 +157,7 @@ NonReentrant modifiers protect against complex reentrancy attacks, ensuring safe
 Smart contract auditing and community code reviews enhance trust and security. Following industry standards, best practices, and thorough testing before mainnet deployment is crucial.
 
 ### Token Rescue and Burning
-Admins can rescue non-C100 tokens sent to the contract and burn unsold C100 tokens post-ICO. Additionally, tokens can be burned from the treasury to manage supply and support market stability.
+Admins can rescue non-C100 tokens sent to the contract and burn unsold C100 tokens post-ICO. Additionally, tokens can be burned from the treasury to manage supply and support market stability. Approved liquidity pools are protected from rescue operations to ensure their integrity.
 
 ## Roadmap
 Our journey to revolutionize crypto index investing:
@@ -181,7 +182,7 @@ Our journey to revolutionize crypto index investing:
 
 ### Phase 2: Growth
 - **Exchange Listings**
-  - DEX integrations
+  - DEX integrations with multiple platforms
   - CEX partnerships
   - Market maker relationships
 - **Marketing Campaigns**
@@ -209,7 +210,7 @@ Our journey to revolutionize crypto index investing:
   - Performance metrics
   - Market insight tools
 - **Additional Trading Pairs**
-  - New liquidity pools
+  - New liquidity pools across different DEXs
   - Cross-chain bridges
   - Synthetic asset integration
 
@@ -232,12 +233,12 @@ Our journey to revolutionize crypto index investing:
 - **Duration:** 12 months.
 - **Accepted Currency:** USDC.
 - **Rate:** Fixed at 1 C100 = 0.001 USDC.
-- **Liquidity Provider Reward:** 1% of each transaction fee allocated to the liquidity pool.
+- **Liquidity Provider Reward:** 1% of each transaction fee allocated to approved liquidity pools.
 
 ### During the ICO
 - **Purchases:** Investors buy C100 directly from the public sale contract using USDC at a fixed rate.
 - **Rebase Operations:** Admins periodically call rebase to keep C100 supply aligned with the top 100 market cap.
-- **Liquidity Provision:** Liquidity providers contribute to the C100/USDC liquidity pool and earn rewards based on their contribution.
+- **Liquidity Provision:** Liquidity providers contribute to approved C100/USDC liquidity pools and earn rewards based on their contribution.
 
 ### Post-ICO Finalization and Burning Unsold Tokens
 At the end of the ICO:
@@ -252,7 +253,7 @@ After the ICO:
 
 ### Liquidity Provider Participation During ICO
 - **Incentives:** During the ICO, liquidity providers are rewarded with a fixed percentage of the transaction fees.
-- **Participation:** Anyone can become a liquidity provider by adding C100 and USDC to the supported DEXs.
+- **Participation:** Anyone can become a liquidity provider by adding C100 and USDC to the approved DEXs.
 - **Rewards Distribution:** Rewards are distributed proportionally based on the amount of liquidity each provider contributes, ensuring fair compensation for contributions.
 
 ---
@@ -320,7 +321,7 @@ After the ICO:
     **A:** Yes, on DEXs where liquidity is provided by the treasury and liquidity providers.
 
 21. **Q:** Will there be a stable price?  
-    **A:** The presale has a fixed price, and post-presale pricing is determined by the liquidity pool, aiming for stability through market forces.
+    **A:** The presale has a fixed price, and post-presale pricing is determined by the approved liquidity pools, aiming for stability through market forces.
 
 22. **Q:** Does C100 pay dividends?  
     **A:** Not directly. The value accrues by tracking the market cap of the top 100 cryptos.
@@ -356,7 +357,7 @@ After the ICO:
     **A:** Yes, once governance is established, it can vote on parameters like fees and treasury allocations.
 
 33. **Q:** Will there be a treasury?  
-    **A:** Yes, a fee-based treasury is introduced, funded by transaction fees split between the treasury and liquidity pool.
+    **A:** Yes, a fee-based treasury is introduced, funded by transaction fees split between the treasury and approved liquidity pools.
 
 34. **Q:** How do treasury fees work?  
     **A:** A portion of transaction fees (1%) is sent to the treasury wallet, supporting project growth and strategic initiatives.
@@ -410,7 +411,7 @@ After the ICO:
     **A:** Based on the predefined rebase frequency, initially set to daily.
 
 51. **Q:** Will there be an official oracle integration?  
-    **A:** Plans are in place to automate rebasing with oracles and governance in the future.
+    **A:** Yes, plans include automating rebases with oracles as governance evolves.
 
 52. **Q:** Can governance integrate Chainlink oracles?  
     **A:** Yes, governance can approve contracts and integrate reliable oracles to automate rebasing.
@@ -482,7 +483,7 @@ After the ICO:
     **A:** Yes, if proposals pass, governance can adjust fee parameters.
 
 75. **Q:** Where do fees go?  
-    **A:** Fees are split between the treasury (1%) and the liquidity pool (1%).
+    **A:** Fees are split between the treasury (1%) and all approved liquidity pools (1%).
 
 76. **Q:** How is treasury managed?  
     **A:** By governance votes on how to allocate or use funds.
@@ -524,7 +525,7 @@ After the ICO:
     **A:** Not currently. Community can propose incentive programs later.
 
 89. **Q:** How is liquidity provided initially?  
-    **A:** Treasury adds initial liquidity to a DEX, possibly at the fixed presale rate.
+    **A:** Treasury adds initial liquidity to approved DEXs, possibly at the fixed presale rate.
 
 90. **Q:** Can I track C100 price on aggregators?  
     **A:** Yes, once listed, price data will appear on coin trackers.
@@ -554,10 +555,10 @@ After the ICO:
     **A:** C100 provides broad, fair, and transparent index exposure with a clear path to decentralization and community governance.
 
 99. **Q:** How are liquidity providers rewarded?  
-    **A:** Liquidity providers receive a fixed 1% fee from each transaction, incentivizing providing liquidity and ensuring a stable trading environment.
+    **A:** Liquidity providers receive a fixed 1% fee from each transaction, allocated proportionally across all approved liquidity pools, incentivizing providing liquidity and ensuring a stable trading environment.
 
 100. **Q:** What is the fee structure for transactions?  
-     **A:** A total of 2% fee per transaction is applied, split equally between the treasury (1%) and the liquidity pool (1%).
+     **A:** A total of 2% fee per transaction is applied, split equally between the treasury (1%) and the approved liquidity pools (1%).
 
 101. **Q:** How is the fixed price during presale maintained?  
      **A:** During the presale period, a fixed rate of 1 C100 = 0.001 USDC is enforced, ensuring price stability for early investors.
@@ -569,13 +570,13 @@ After the ICO:
      **A:** The rebase frequency is predefined and can be adjusted by governance in the future to meet community needs.
 
 104. **Q:** Can the liquidity pool be changed after deployment?  
-     **A:** Yes, admins or governance can set or update the liquidity pool address as needed.
+     **A:** Yes, admins or governance can set or update approved liquidity pool addresses as needed.
 
-105. **Q:** How are fees allocated if there is no liquidity pool?  
-     **A:** If no liquidity pool is set, the entire fee is allocated to the treasury.
+105. **Q:** How are fees allocated if there are no approved liquidity pools?  
+     **A:** If no approved liquidity pools are set, all LP fees are allocated to the treasury to prevent loss.
 
 106. **Q:** What ensures the security of fee allocations?  
-     **A:** The contract uses OpenZeppelin’s `SafeERC20` for secure token transfers and incorporates reentrancy guards.
+     **A:** The contract uses OpenZeppelin’s `SafeERC20` for secure token transfers, `EnumerableSet` for managing approved pools, and incorporates reentrancy guards.
 
 107. **Q:** How are unsold tokens handled post-ICO?  
      **A:** Unsold tokens are burned, reducing the total supply and maintaining supply integrity.
@@ -583,8 +584,8 @@ After the ICO:
 108. **Q:** Can the treasury be updated after deployment?  
      **A:** Yes, admins can update the treasury address to a new address as needed.
 
-109. **Q:** What if the liquidity pool becomes compromised?  
-     **A:** Governance can update the liquidity pool address to a secure and trusted pool if necessary.
+109. **Q:** What if an approved liquidity pool becomes compromised?  
+     **A:** Governance can remove the compromised pool and add a secure and trusted pool to ensure continued fee allocation integrity.
 
 110. **Q:** How are token burns executed?  
      **A:** Admins can burn tokens from the treasury by transferring them to the burn address.
@@ -611,6 +612,6 @@ For further inquiries, support, or to engage with the COIN100 team, please reach
 ---
 
 ## Conclusion
-COIN100 (C100) offers a robust and transparent mechanism for investors to gain diversified exposure to the top 100 cryptocurrencies. Through its rebasing supply model, fee-based treasury and liquidity growth, and streamlined public sale mechanics, C100 stands as a reliable and scalable index fund in the decentralized finance ecosystem. With a clear governance roadmap and community-driven initiatives, C100 is poised to evolve and adapt, ensuring long-term stability and value for its holders. Join the COIN100 community today and be part of the future of decentralized index investing.
+COIN100 (C100) offers a robust and transparent mechanism for investors to gain diversified exposure to the top 100 cryptocurrencies. Through its rebasing supply model, fee-based treasury and liquidity growth, multiple liquidity pool support, and streamlined public sale mechanics, C100 stands as a reliable and scalable index fund in the decentralized finance ecosystem. With a clear governance roadmap and community-driven initiatives, C100 is poised to evolve and adapt, ensuring long-term stability and value for its holders. Join the COIN100 community today and be part of the future of decentralized index investing.
 
 ---
