@@ -608,8 +608,8 @@ For further inquiries, support, or to engage with the COIN100 team, please reach
 - **Reddit:** [r/Coin100](https://www.reddit.com/r/Coin100)
 - **X:** [@Coin100token](https://x.com/Coin100token)
 - **Telegram:** [@Coin100token](https://t.me/coin100token)
-- **Coin100 Polyscan:** [C100](https://polygonscan.com/token/0x84bd4126021aada78d3126701070b55b06a03ef5)
-- **Coin100 PublicSale Polyscan:** [C100 public sale](https://polygonscan.com/address/0xafbfd4d267a693395b31d6bceb6c769f0d22d889)
+- **Coin100 Polyscan:** [C100](https://polygonscan.com/token/0x08a81dabe6446d81953cad7362486b459b3abc6a)
+- **Coin100 PublicSale Polyscan:** [C100 public sale](https://polygonscan.com/address/0x1d1585d1e0748867d2a086f8e9fbc1c4bb5ac039)
 
 ---
 
