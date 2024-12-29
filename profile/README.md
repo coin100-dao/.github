@@ -1,46 +1,49 @@
 # COIN100 (C100) Documentation
 
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Problem Statement](#problem-statement)
-3. [Solution: COIN100 (C100) Token](#solution-coin100-c100-token)
-4. [Key Principles and Features](#key-principles-and-features)
+1. [Introduction](#introduction)  
+2. [Problem Statement](#problem-statement)  
+3. [Solution: COIN100 (C100) Token](#solution-coin100-c100-token)  
+4. [Key Principles and Features](#key-principles-and-features)  
    - 4.1. [Fairness and Equal Treatment of Holders](#fairness-and-equal-treatment-of-holders)
    - 4.2. [Global Rebase Mechanism](#global-rebase-mechanism)
    - 4.3. [Fixed Pricing During Presale](#fixed-pricing-during-presale)
    - 4.4. [Fee-Based Treasury and Liquidity Growth](#fee-based-treasury-and-liquidity-growth)
    - 4.5. [Multiple Liquidity Pool Support](#multiple-liquidity-pool-support)
    - 4.6. [Simplified Public Sale Mechanics](#simplified-public-sale-mechanics)
-5. [Tokenomics](#tokenomics)
+5. [Tokenomics](#tokenomics)  
    - 5.1. [Initial Parameters](#initial-parameters)
    - 5.2. [Distribution (Treasury Allocation & ICO)](#distribution-treasury-allocation--ico)
    - 5.3. [Rebase Formula](#rebase-formula)
    - 5.4. [Market Dynamics and Price Stability](#market-dynamics-and-price-stability)
    - 5.5. [Liquidity Provider Rewards](#liquidity-provider-rewards)
    - 5.6. [Fee-Based Treasury](#fee-based-treasury)
-6. [Technical Architecture](#technical-architecture)
+6. [Technical Architecture](#technical-architecture)  
    - 6.1. [Polygon Network](#polygon-network)
    - 6.2. [C100 Token Contract](#c100-token-contract)
    - 6.3. [Public Sale Contract](#public-sale-contract)
    - 6.4. [Scaling and GonsPerFragment](#scaling-and-gonsperfragment)
    - 6.5. [Rebase Mechanism](#rebase-mechanism)
-7. [Governance](#governance)
+   - 6.6. [Rebase Ratio Limits (New)](#rebase-ratio-limits-new)
+   - 6.7. [Enhanced Public Sale Features (New)](#enhanced-public-sale-features-new)
+7. [Governance](#governance)  
    - 7.1. [Transition from Owner to Governor](#transition-from-owner-to-governor)
    - 7.2. [Future Governor Contract](#future-governor-contract)
    - 7.3. [Community Involvement](#community-involvement)
-8. [Security](#security)
+8. [Security](#security)  
    - 8.1. [Ownership Controls](#ownership-controls)
    - 8.2. [Pause/Unpause Mechanisms](#pauseunpause-mechanisms)
    - 8.3. [Reentrancy Guards](#reentrancy-guards)
    - 8.4. [Audits and Best Practices](#audits-and-best-practices)
    - 8.5. [Token Rescue and Burning](#token-rescue-and-burning)
-9. [Roadmap](#roadmap)
-10. [ICO Plan (Simplicity-Focused)](#ico-plan-simplicity-focused)
+9. [Roadmap](#roadmap)  
+10. [ICO Plan (Simplicity-Focused)](#ico-plan-simplicity-focused)  
     - 10.1. [ICO Parameters](#ico-parameters)
     - 10.2. [During the ICO](#during-the-ico)
     - 10.3. [Post-ICO Finalization and Burning Unsold Tokens](#post-ico-finalization-and-burning-unsold-tokens)
     - 10.4. [Maintaining the Index Post-ICO](#maintaining-the-index-post-ico)
     - 10.5. [Liquidity Provider Participation During ICO](#liquidity-provider-participation-during-ico)
+    - 10.6. [Public Sale Enhancements (New)](#public-sale-enhancements-new)
 11. [FAQ](#faq)
 12. [Contact Information](#contact-information)
 13. [Conclusion](#conclusion)
@@ -63,79 +66,95 @@ C100 addresses these challenges by:
 - Introducing fee-based treasury and liquidity growth mechanisms.
 - Supporting multiple liquidity pools to maximize liquidity and decentralization.
 - Simplifying public sale mechanics to ensure broad accessibility and ease of participation for all investors.
+- **(New)** Enhancing the public sale with vesting schedules, purchase caps, delays, and multi-token payment options.
 
 ## Key Principles and Features
 
-### Fairness and Equal Treatment of Holders
+### 4.1. Fairness and Equal Treatment of Holders
 Every holder’s balance scales proportionally with changes in the total market cap. No single participant is advantaged or disadvantaged during rebases.
 
-### Global Rebase Mechanism
+### 4.2. Global Rebase Mechanism
 On each rebase call, the total supply adjusts to reflect the updated top 100 crypto market cap. All balances scale equally, maintaining each holder’s fractional ownership.
 
-### Fixed Pricing During Presale
-During the presale period, C100 tokens are sold at a fixed rate of 1 C100 = 0.001 USDC. This ensures price stability and predictability for early investors.
+### 4.3. Fixed Pricing During Presale
+During the presale period, C100 tokens are sold at a fixed rate of 1 C100 = 0.001 USDC (example rate). This ensures price stability and predictability for early investors.
 
-### Fee-Based Treasury and Liquidity Growth
+### 4.4. Fee-Based Treasury and Liquidity Growth
 C100 introduces a 2% transaction fee, split equally between the treasury (1%) and the approved liquidity pools (1%). This mechanism supports continuous growth and funding for development, marketing, and liquidity provisioning.
 
-### Multiple Liquidity Pool Support
+### 4.5. Multiple Liquidity Pool Support
 C100 supports multiple liquidity pools (C100/USDC) managed by the admin to maximize liquidity, enhance decentralization, and ensure resilience. This allows liquidity to be distributed across various DEXs, providing flexibility for liquidity providers and improving price stability.
 
-### Simplified Public Sale Mechanics
-The public sale is streamlined to accept only USDC at a fixed rate, reducing complexity and enhancing user experience. This ensures broad accessibility and ease of participation for all investors.
+### 4.6. Simplified Public Sale Mechanics
+The public sale is streamlined to accept only USDC (and/or other tokens) at a fixed rate, reducing complexity and enhancing user experience. This ensures broad accessibility and ease of participation for all investors.
 
 ## Tokenomics
 
-### Initial Parameters
+### 5.1. Initial Parameters
 - **Total Supply:** Equal to the initial top 100 crypto market cap (denominated in C100 units).
-- **Initial Price:** Fixed at approximately 0.001 USDC per C100 token during presale.
+- **Initial Price:** Fixed at approximately 0.001 USDC per C100 token during presale (example).
+- **(New)** Vesting & Purchase Caps: The public sale may include vesting schedules, purchase limits, and delay periods (see [Section 10.6](#public-sale-enhancements-new)).
 
-### Distribution (Treasury Allocation & ICO)
+### 5.2. Distribution (Treasury Allocation & ICO)
 - **Treasury Allocation:** 100% of the initial supply is allocated to the treasury for distribution during the ICO and liquidity provisioning.
 - **ICO Allocation:** The treasury manages the sale of C100 tokens during the ICO, allowing widespread distribution and community participation.
 
-### Rebase Formula
-**ratio = M_new / M_old**  
-- **New Supply = Old Supply * ratio**  
-- Every holder’s balance is multiplied by the same ratio.
+### 5.3. Rebase Formula
+ratio = M_new / M_old New Supply = Old Supply * ratio
+Every holder’s balance is multiplied by the same ratio. This ensures fair and transparent tracking of the market cap changes.
 
-This ensures fair and transparent tracking of the market cap changes.
-
-### Market Dynamics and Price Stability
+### 5.4. Market Dynamics and Price Stability
 If the market cap doubles, all balances double, maintaining the same fractional ownership. As the community matures and markets become more efficient, the token price should remain stable around its baseline in response to these proportional adjustments.
 
-### Liquidity Provider Rewards
+### 5.5. Liquidity Provider Rewards
 Liquidity providers are incentivized through a fixed reward system. A dedicated 1% fee from each transaction is allocated to all approved liquidity pools, ensuring deep liquidity pools, reducing slippage, and fostering a robust trading environment.
 
-### Fee-Based Treasury
+### 5.6. Fee-Based Treasury
 A 1% transaction fee is collected and sent to the treasury address. This mechanism supports the growth and sustainability of the project by funding development, marketing, audits, and other strategic initiatives.
 
 ## Technical Architecture
 
-### Polygon Network
+### 6.1. Polygon Network
 Deployed on Polygon for low gas fees and high throughput, ensuring efficient and cost-effective transactions for users.
 
-### C100 Token Contract
-Implements ERC20 standards with a rebasing mechanism, ownership control, pause/unpause functionalities, fee splitting between treasury and multiple liquidity pools, and integration points for future governance.
+### 6.2. C100 Token Contract
+Implements ERC20 standards with a rebasing mechanism, ownership control, pause/unpause functionalities, fee splitting between treasury and multiple liquidity pools, rebase ratio limits, and integration points for future governance.
 
-### Public Sale Contract
-Handles the initial distribution of C100 tokens. Investors purchase C100 with USDC at a fixed rate during the ICO period. Unsold tokens are burned at the end, ensuring only the circulating supply reflects real participants.
+### 6.3. Public Sale Contract
+Handles the initial distribution of C100 tokens. Investors purchase C100 with USDC (and potentially other whitelisted tokens) at a fixed rate during the ICO period. Unsold tokens are burned at the end, ensuring only the circulating supply reflects real participants.
 
-### Scaling and GonsPerFragment
+### 6.4. Scaling and GonsPerFragment
 Balances are tracked in a large integer unit called “gons.” The global `gonsPerFragment` variable determines how these translate into user balances. On rebase, adjusting `gonsPerFragment` updates everyone’s balance proportionally in O(1) complexity.
 
-### Rebase Mechanism
+### 6.5. Rebase Mechanism
 The rebase mechanism adjusts the total supply based on the new market capitalization and current price. During presale, a fixed price is used, and post-presale, the price is determined by averaging prices from multiple approved liquidity pools (C100/USDC). This ensures accurate and real-time supply adjustments aligned with market conditions.
+
+### 6.6. Rebase Ratio Limits (New)
+To prevent extreme jumps in supply, the C100 token contract enforces **maxRatio** and **minRatio** during a rebase. For example:
+- **maxRatio = 2e18** (+100% limit on a single rebase)
+- **minRatio = 0.5e18** (–50% limit on a single rebase)
+
+Any attempted rebase ratio outside these bounds will revert, ensuring stability and protecting holders from drastic supply changes.
+
+### 6.7. Enhanced Public Sale Features (New)
+The new **`C100PublicSale`** contract introduces:
+- **Multiple Payment Tokens:** Buyers can purchase C100 using approved ERC20 tokens at defined rates.
+- **Vesting Schedules:** Purchased tokens are locked for a certain duration (e.g., 12 months) and claimable after the vesting period.
+- **Purchase Caps:** Each wallet can only buy up to a set maximum of C100 tokens during the sale, preventing large whales from dominating.
+- **Purchase Delays:** After buying, users must wait a certain time (e.g., 5 minutes) before buying again, mitigating bot abuse.
+- **Finalize and Burn:** After the sale ends, any truly unsold tokens are burned, preserving supply integrity.
+- **Claim Function:** Once the vesting period is over, users call `claimTokens()` to retrieve their purchased C100.
+- **Admin Rescue:** Tokens accidentally sent to the sale contract (except C100 itself or whitelisted payment tokens) can be rescued by the admin, ensuring safety.
 
 ## Governance
 
-### Transition from Owner to Governor
+### 7.1. Transition from Owner to Governor
 Initially, the treasury manages the contract. Over time, a governor contract can be introduced. The governor can propose and vote on changes (parameters, treasury usage, etc.), enabling community-driven evolution.
 
-### Future Governor Contract
+### 7.2. Future Governor Contract
 By deploying a governor contract and timelock controller, the project gradually moves towards full decentralization. Governance token holders can vote on upgrades, new features, or parameter changes (e.g., adjusting the rebase frequency, fees, or liquidity rewards).
 
-### Community Involvement
+### 7.3. Community Involvement
 The community will shape the project’s future by proposing:
 - Adjusting parameters (fees, rebase frequency)
 - Allocating treasury funds for development, marketing, or liquidity
@@ -144,23 +163,22 @@ The community will shape the project’s future by proposing:
 
 ## Security
 
-### Ownership Controls
+### 8.1. Ownership Controls
 The `onlyAdmin` modifiers ensure that only authorized parties (treasury or governor) can make critical changes, safeguarding the contract against unauthorized modifications.
 
-### Pause/Unpause Mechanisms
+### 8.2. Pause/Unpause Mechanisms
 The contract can be paused in emergencies, preventing transfers and safeguarding against exploits during uncertain times.
 
-### Reentrancy Guards
+### 8.3. Reentrancy Guards
 NonReentrant modifiers protect against complex reentrancy attacks, ensuring safe execution of functions like buying tokens or rebasing.
 
-### Audits and Best Practices
+### 8.4. Audits and Best Practices
 Smart contract auditing and community code reviews enhance trust and security. Following industry standards, best practices, and thorough testing before mainnet deployment is crucial.
 
-### Token Rescue and Burning
+### 8.5. Token Rescue and Burning
 Admins can rescue non-C100 tokens sent to the contract and burn unsold C100 tokens post-ICO. Additionally, tokens can be burned from the treasury to manage supply and support market stability. Approved liquidity pools are protected from rescue operations to ensure their integrity.
 
 ## Roadmap
-Our journey to revolutionize crypto index investing:
 
 ### Phase 1: Launch
 - **Smart Contract Development**
@@ -229,32 +247,56 @@ Our journey to revolutionize crypto index investing:
 
 ## ICO Plan (Simplicity-Focused)
 
-### ICO Parameters
-- **Duration:** 12 months.
-- **Accepted Currency:** USDC.
-- **Rate:** Fixed at 1 C100 = 0.001 USDC.
-- **Liquidity Provider Reward:** 1% of each transaction fee allocated to approved liquidity pools.
+### 10.1. ICO Parameters
+- **Duration:** 12 months (example).
+- **Accepted Currency:** USDC and/or other approved ERC20 tokens.
+- **Rate:** Fixed at 1 C100 = 0.001 USDC (example) or set by the admin’s defined rate.
+- **Liquidity Provider Reward:** A portion (e.g., 1%) of each transaction fee allocated to approved liquidity pools.
 
-### During the ICO
-- **Purchases:** Investors buy C100 directly from the public sale contract using USDC at a fixed rate.
+### 10.2. During the ICO
+- **Purchases:** Investors buy C100 directly from the public sale contract using USDC (or other whitelisted tokens) at a fixed or specified rate.
 - **Rebase Operations:** Admins periodically call rebase to keep C100 supply aligned with the top 100 market cap.
 - **Liquidity Provision:** Liquidity providers contribute to approved C100/USDC liquidity pools and earn rewards based on their contribution.
 
-### Post-ICO Finalization and Burning Unsold Tokens
+### 10.3. Post-ICO Finalization and Burning Unsold Tokens
 At the end of the ICO:
 - **No More Purchases:** ICO phase concludes, preventing further token sales.
-- **Burn Unsold Tokens:** Any unsold tokens are burned, ensuring the supply reflects only actively held tokens.
+- **Burn Unsold Tokens:** Any truly unsold tokens are burned, ensuring the supply reflects only actively held tokens.
 
-### Maintaining the Index Post-ICO
+### 10.4. Maintaining the Index Post-ICO
 After the ICO:
 - **Continuous Rebasing:** Continue periodic rebases to adjust supply based on market cap changes.
 - **Automated Upkeep:** Transition to automated rebase operations using oracles and governance decisions.
 - **Governance Enhancements:** Introduce advanced features such as treasury management, automated liquidity rewards, and fee adjustments through community proposals.
 
-### Liquidity Provider Participation During ICO
-- **Incentives:** During the ICO, liquidity providers are rewarded with a fixed percentage of the transaction fees.
+### 10.5. Liquidity Provider Participation During ICO
+- **Incentives:** During the ICO, liquidity providers are rewarded with a portion of the transaction fees.
 - **Participation:** Anyone can become a liquidity provider by adding C100 and USDC to the approved DEXs.
 - **Rewards Distribution:** Rewards are distributed proportionally based on the amount of liquidity each provider contributes, ensuring fair compensation for contributions.
+
+### 10.6. Public Sale Enhancements (New)
+In the updated **C100PublicSale** contract, several **new features** improve fairness and security:
+
+1. **Vesting Period**  
+   - All purchased C100 tokens are locked for a predefined duration (e.g., 12 months). Investors must wait until the vesting cliff to claim their tokens, reducing immediate sell pressure.
+
+2. **Per-User Purchase Cap**  
+   - A maximum limit is set for each wallet’s total C100 purchases during the sale, preventing excessively large accumulations by single participants.
+
+3. **Purchase Delay**  
+   - After each purchase, a user must wait a specified period (e.g., 5 minutes) before buying again, discouraging rapid, bot-based accumulations.
+
+4. **Multiple ERC20 Payments**  
+   - The public sale contract can whitelist several payment tokens (e.g., USDC, DAI, or WETH) with custom rates. Each token is carefully configured with a price ratio that determines how much C100 a buyer receives per token.
+
+5. **Finalize and Burn**  
+   - After the public sale ends, the contract’s `finalize()` function burns any unsold tokens. Only tokens genuinely sold or vested remain, ensuring supply integrity.
+
+6. **Claim Function**  
+   - Investors claim their locked tokens after the vesting duration has elapsed. Any unclaimed tokens remain locked until the user calls the claim function.
+
+7. **Admin Rescue**  
+   - The contract owner or future governance can rescue tokens accidentally sent to the sale contract (excluding the main C100 token or whitelisted payment tokens), ensuring clarity and asset safety.
 
 ---
 
@@ -495,13 +537,13 @@ After the ICO:
     **A:** Governance could adapt the model if needed.
 
 79. **Q:** How frequently is market cap data updated?  
-    **A:** Admins call the rebase function based on the predefined rebase frequency, initially daily.
+    **A:** Admins call the rebase function based on the predefined frequency, initially daily.
 
 80. **Q:** Does holding C100 require any special steps?  
     **A:** No, just hold it in a Polygon-compatible wallet.
 
 81. **Q:** Is there a minimum gas token needed?  
-    **A:** Yes, POL for gas fees on Polygon.
+    **A:** Yes, POL (or MATIC, depending on the chain rename) for gas fees on Polygon.
 
 82. **Q:** Can I bridge C100 to other chains?  
     **A:** Potentially in the future if bridges support it.
@@ -555,7 +597,7 @@ After the ICO:
     **A:** C100 provides broad, fair, and transparent index exposure with a clear path to decentralization and community governance.
 
 99. **Q:** How are liquidity providers rewarded?  
-    **A:** Liquidity providers receive a fixed 1% fee from each transaction, allocated proportionally across all approved liquidity pools, incentivizing providing liquidity and ensuring a stable trading environment.
+    **A:** Liquidity providers receive a fixed 1% fee from each transaction, allocated proportionally across all approved liquidity pools.
 
 100. **Q:** What is the fee structure for transactions?  
      **A:** A total of 2% fee per transaction is applied, split equally between the treasury (1%) and the approved liquidity pools (1%).
@@ -585,7 +627,7 @@ After the ICO:
      **A:** Yes, admins can update the treasury address to a new address as needed.
 
 109. **Q:** What if an approved liquidity pool becomes compromised?  
-     **A:** Governance can remove the compromised pool and add a secure and trusted pool to ensure continued fee allocation integrity.
+     **A:** Governance can remove the compromised pool and add a secure, trusted pool to ensure continued fee allocation integrity.
 
 110. **Q:** How are token burns executed?  
      **A:** Admins can burn tokens from the treasury by transferring them to the burn address.
@@ -601,19 +643,19 @@ After the ICO:
 ## Contact Information
 For further inquiries, support, or to engage with the COIN100 team, please reach out through the following channels:
 
-- **Website:** [https://coin100.link](https://coin100.link)
-- **Email:** [mayor@coin100.link](mailto:mayor@coin100.link)
-- **Github:** [coin100-dao](https://github.com/coin100-dao)
-- **Discord:** [Join Our Discord](https://discord.com/channels/1318664310490398770/1318664310490398773)
-- **Reddit:** [r/Coin100](https://www.reddit.com/r/Coin100)
-- **X:** [@Coin100token](https://x.com/Coin100token)
-- **Telegram:** [@Coin100token](https://t.me/coin100token)
-- **Coin100 Polyscan:** [C100](https://polygonscan.com/token/0x3c5034f0b8e9ecb0aa13ef96adf9d97fb0107eec)
+- **Website:** [https://coin100.link](https://coin100.link)  
+- **Email:** [mayor@coin100.link](mailto:mayor@coin100.link)  
+- **Github:** [coin100-dao](https://github.com/coin100-dao)  
+- **Discord:** [Join Our Discord](https://discord.com/channels/1318664310490398770/1318664310490398773)  
+- **Reddit:** [r/Coin100](https://www.reddit.com/r/Coin100)  
+- **X:** [@Coin100token](https://x.com/Coin100token)  
+- **Telegram:** [@Coin100token](https://t.me/coin100token)  
+- **Coin100 Polyscan:** [C100](https://polygonscan.com/token/0x3c5034f0b8e9ecb0aa13ef96adf9d97fb0107eec)  
 - **Coin100 PublicSale Polyscan:** [C100 public sale](https://polygonscan.com/address/0xaf4fc2742cea373ec18f17a601e64a74aeebb0cc)
 
 ---
 
 ## Conclusion
-COIN100 (C100) offers a robust and transparent mechanism for investors to gain diversified exposure to the top 100 cryptocurrencies. Through its rebasing supply model, fee-based treasury and liquidity growth, multiple liquidity pool support, and streamlined public sale mechanics, C100 stands as a reliable and scalable index fund in the decentralized finance ecosystem. With a clear governance roadmap and community-driven initiatives, C100 is poised to evolve and adapt, ensuring long-term stability and value for its holders. Join the COIN100 community today and be part of the future of decentralized index investing.
+COIN100 (C100) offers a robust and transparent mechanism for investors to gain diversified exposure to the top 100 cryptocurrencies. Through its rebasing supply model, fee-based treasury and liquidity growth, multiple liquidity pool support, and streamlined public sale mechanics—now **enhanced** by vesting schedules, purchase caps, multi-token payment support, and min/max rebase ratio limits—C100 stands as a reliable and scalable index fund in the decentralized finance ecosystem. With a clear governance roadmap and community-driven initiatives, C100 is poised to evolve and adapt, ensuring long-term stability and value for its holders. Join the COIN100 community today and be part of the future of decentralized index investing.
 
 ---
